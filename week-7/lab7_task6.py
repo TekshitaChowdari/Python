@@ -1,0 +1,32 @@
+import time
+
+def log_call(func):
+    def wrapper(*args, **kwargs):
+        print("Calling:", func.__name__)
+        result = func(*args, **kwargs)
+        print("Return value:", result)
+        return result
+    return wrapper
+
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print("Execution time:", end - start, "seconds")
+        return result
+    return wrapper
+
+
+@log_call
+@timer
+def add(a, b):
+    return a + b
+
+
+print("Result:", add(10, 20))
+#Calling: wrapper
+#Execution time: 1.9073486328125e-06 seconds
+#Return value: 30
+#Result: 30
